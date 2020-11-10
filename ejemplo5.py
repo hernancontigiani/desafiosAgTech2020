@@ -1,4 +1,7 @@
-import matplotlib.pyplot as plt #pip install matplotlib
+#DISCLAIRMER: ESTE CODIGO ES A MODO DE EJEMPLO DIDÁCTICO, NO CONTIENE CONTROL DE ERRORES, NI SOFISTICACIONES, NI MEJORAS DE
+# PERFORMANCE. TODOS LOS USOS DE LIBRERIAS EXTERNAS PUEDEN SER MEJORADAS EN SU IMPLEMENTACIÓN.
+# ===================================================================================
+import matplotlib.pyplot as plt 
 import numpy as np
 import csv
 import ee
@@ -33,6 +36,8 @@ target_SR.ImportFromWkt(raster_ds.GetProjectionRef())
 
 puntos_train=list()
 puntos_test=list()
+
+# Hacer un función para abrir los puntos, vergonzoso!
 
 with open(train_csv_name, newline='') as csvfile:
     reader = csv.DictReader(csvfile)

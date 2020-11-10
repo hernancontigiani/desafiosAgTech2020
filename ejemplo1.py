@@ -1,5 +1,5 @@
-# NOTA: ESTE CODIGO ES A MODO DE EJEMPLO DIDÁCTICO
-#       NO CONTIENE CONTROL DE ERRORES, NI SOFISTICACIONES, NI MEJORAS DE PERFORMANCE
+#DISCLAIRMER: ESTE CODIGO ES A MODO DE EJEMPLO DIDÁCTICO, NO CONTIENE CONTROL DE ERRORES, NI SOFISTICACIONES, NI MEJORAS DE
+# PERFORMANCE. TODOS LOS USOS DE LIBRERIAS EXTERNAS PUEDEN SER MEJORADAS EN SU IMPLEMENTACIÓN.
 # ===================================================================================
 
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ for i in range(raster_ds.RasterCount):
 
 # CALCULOS
 # ==================================================================================
-ndvi= (raster_dataPixel[:,:,3]-raster_dataPixel[:,:,2])/(raster_dataPixel[:,:,3]+raster_dataPixel[:,:,2])
+ndvi= (raster_dataPixel[:,:,3]-raster_dataPixel[:,:,2])/(raster_dataPixel[:,:,3]+raster_dataPixel[:,:,2]) # (NIR-R)/(NIR+R)
 noVeg = ndvi<0.4
 
 # MUESTRO LAS IMGS

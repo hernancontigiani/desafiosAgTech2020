@@ -1,7 +1,3 @@
-#DISCLAIRMER: ESTE CODIGO ES A MODO DE EJEMPLO DIDÁCTICO, NO CONTIENE CONTROL DE ERRORES, NI SOFISTICACIONES, NI MEJORAS DE
-# PERFORMANCE. TODOS LOS USOS DE LIBRERIAS EXTERNAS PUEDEN SER MEJORADAS EN SU IMPLEMENTACIÓN.
-# ===================================================================================
- 
 import matplotlib.pyplot as plt 
 import csv
 from osgeo import gdal,ogr,osr
@@ -47,10 +43,12 @@ with open(train_csv_name, newline='') as csvfile:
                 point.Transform(coordTrans)
                 transf_x,transf_y=point.GetX(), point.GetY()
 
-                px = int((transf_x - raster_gt[0]) / raster_gt[1]) #x pixel
-                py = int((transf_y - raster_gt[3]) / raster_gt[5]) #y pixel
+                for i in np.arange(-2,2):
+                    for j in np.arange(-2,2):
+                        px = int((transf_x - raster_gt[0]) / raster_gt[1]) +i#x pixel
+                        py = int((transf_y - raster_gt[3]) / raster_gt[5]) +j#y pixel
 
-                puntos_train.append({'lat':row['Latitud'],'lon':row['Longitud'],'px':px,'py':py,'cultivo':row['Cultivo'],'camp':row['Campania']})
+                        puntos_train.append({'lat':row['Latitud'],'lon':row['Longitud'],'px':px,'py':py,'cultivo':row['Cultivo'],'camp':row['Campania']})
 
 
 # OBTENGO LOS VALORES DE LOS PIXELES
