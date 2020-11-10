@@ -1,8 +1,9 @@
-import matplotlib.pyplot as plt #pip install matplotlib
+import matplotlib.pyplot as plt 
 import numpy as np
 import csv
 from osgeo import gdal,ogr,osr
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 # ARCHIVOS  A UTILIZAR
 # ==================================================================================
@@ -75,17 +76,16 @@ classifier.fit(valores_pixeles_entrenamiento,clase_entrenamiento)
 puntos_predichos = [classifier.predict([raster_dataPixel[p['py'],p['px'],:]]) for p in puntos_test]
 
 
-F,C,bands = raster_dataPixel.shape
-img_reshape = np.reshape(raster_dataPixel,(F*C,bands),order='C')
+img_reshape = np.reshape(raster_dataPixel,(raster_ds.RasterYSize*raster_ds.RasterXSize,raster_ds.RasterCount),order='C')
 puntos_predichos = np.array(classifier.predict(img_reshape))
-img_clasif_num = np.zeros((F*C))
+img_clasif_num = np.zeros((raster_ds.RasterXSize*raster_ds.RasterYSize))
 img_clasif_num[puntos_predichos=='M']=3
 img_clasif_num[puntos_predichos=='S']=2
 img_clasif_num[puntos_predichos=='m']=3
 img_clasif_num[puntos_predichos=='s']=2
 img_clasif_num[puntos_predichos=='B']=1
 
-img_clasif_num = np.reshape(img_clasif_num,(F,C))
+img_clasif_num = np.reshape(img_clasif_num,(raster_ds.RasterYSize,raster_ds.RasterXSize))
 
 
 plt.imshow(np.array(img_clasif_num,dtype='int'),cmap='jet')
